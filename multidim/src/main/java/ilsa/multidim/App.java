@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import ilsa.multidim.models.Square;
 
 /**
- * Magic Squares making use of multi-dimensional arrays
+ * Magic Squares, making use of multi-dimensional arrays
  *
  */
 public class App {
@@ -18,22 +18,19 @@ public class App {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
 
-		// tellen horizontaal en verticaal
 		int numberOfTokensLuna = countTokens(FILE_LUNA);
-		System.out.println(numberOfTokensLuna);
-		
+		int numberOfTokensMercury = countTokens(FILE_MERCURY);
 		int numberOfLinesLuna = countLines(FILE_LUNA);
-		System.out.println(numberOfLinesLuna);
+		int numberOfLinesMercury = countLines(FILE_MERCURY);
+		System.out.printf("Luna has %d columns and %d rows.\n", numberOfLinesLuna, numberOfTokensLuna);
+		System.out.printf("Mercury has %d columns and %d rows.\n", numberOfLinesMercury, numberOfTokensMercury);
 
 		// multidimensional arrays aanmaken
 		Square squareLuna = new Square(numberOfTokensLuna, numberOfLinesLuna);
-//		Square squareMercury = Square(numberOfTokens, numberOfLines);
-		
+		Square squareMercury = new Square(numberOfTokensMercury, numberOfLinesMercury);
 
-//		Square squareMercury = new Square();
-//		Square squareLuna = new Square();
-//
-//		readFile(FILE_MERCURY, squareMercury);
+		readFile(FILE_MERCURY, squareMercury);
+
 //
 //		// check that all rows sum to the same constant.
 //		boolean equalHorMercury = squareMercury.eachLineEqualSum();
@@ -60,36 +57,37 @@ public class App {
 
 	}
 
-//	private static void readFile(URL fileName, Square square) {
-//		int numberOfItems = countLines(fileName);
-//		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
-//
-//			while (readLine.hasNextLine()) {
-//				Line line = new Line();
-//
-//				for (int i = 0; i < numberOfItems; i++) {
-//					int temp = readLine.nextInt();
-//					line.getLine().add(temp);
-//				}
-//				square.getLines().add(line);
-//			}
-//
-//		} catch (FileNotFoundException e) {
-//			System.out.println("\nFile not found!\n");
-//		} catch (NoSuchElementException e) {
-//			System.out.println("\nEnd of file has been reached\n");
-//		}
-//
-//		System.out.println(square.toString());
-//
-//	}
+	private static void readFile(URL fileName, Square square) {
+		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
+
+			while (readLine.hasNextLine()) {
+
+//				System.out.println("Enter " + square.getSquare().length + " rows and " + square.getSquare()[0].length + " columns: ");
+				
+				for (int row = 0; row < square.getSquare().length; row++) {
+					for (int column = 0; column < square.getSquare()[row].length; column++) {
+						square.getSquare()[row][column] = readLine.nextInt();
+					}
+				}
+				
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found!\n");
+		} catch (NoSuchElementException e) {
+			System.out.println("End of file has been reached\n");
+		}
+
+		System.out.println(square.toString());
+
+	}
 
 	private static int countLines(URL fileName) {
 		int count = 0;
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
-			
+
 			while (readFile.nextLine() != null) {
-				count ++;
+				count++;
 				readFile.nextLine();
 			}
 
@@ -100,16 +98,14 @@ public class App {
 		}
 		return count;
 	}
-	
-	
 
 	private static int countTokens(URL fileName) {
 		int count = 0;
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
-			
+
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
-		    count = line.countTokens();
-			
+			count = line.countTokens();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchElementException e) {
