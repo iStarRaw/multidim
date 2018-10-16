@@ -13,9 +13,19 @@ import java.util.Scanner;
 public class App {
 	public static void main(String[] args) {
 		
+		//tellen horizontaal en verticaal
 		//countTokens();
-		//
 		//countLines();
+		
+		//multidimensional arrays aanmaken
+		//Square squareMercury = Square(numberOfTokens, numberOfLines);
+		//Square squareLuna = Square(numberOfTokens, numberOfLines);
+		
+		
+		
+		
+		
+		
 		
 		
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
