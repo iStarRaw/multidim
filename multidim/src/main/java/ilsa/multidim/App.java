@@ -19,6 +19,7 @@ public class App {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
 
+		
 		int numberOfLinesLuna = countLines(FILE_LUNA);
 		int numberOfTokensLuna = countTokens(FILE_LUNA);
 		System.out.printf("Luna has %d columns and %d rows.\n", numberOfLinesLuna, numberOfTokensLuna);
@@ -28,15 +29,15 @@ public class App {
 		readFile(FILE_LUNA, squareLuna);
 		
 		// check that all rows sum to the same constant
-//		boolean equalSumLuna = squareLuna.eachLineEqualSum();
+//		boolean equalSumLuna = squareLuna.equalRowSum();
 //		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
 
 		// check that all columns sum to the same constant.
-//		boolean equalVerluna = squareLuna.eachColumnEqualSum();
+//		boolean equalVerluna = squareLuna.equalColumnSum();
 //		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
 
 		// check that all diagonals sum to the same constant.
-//		boolean equalDiaLuna = squareLuna.eachDiagonalEqualSum();
+//		boolean equalDiaLuna = squareLuna.equalDiagonalSum();
 //		System.out.printf("Do all diagonals sum to the same constant? %b\n", equalDiaLuna);
 		
 		
@@ -51,13 +52,13 @@ public class App {
 		readFile(FILE_MERCURY, squareMercury);
 
 		
-//		boolean equalHorMercury = squareMercury.eachLineEqualSum();
+//		boolean equalHorMercury = squareMercury.equalRowSum();
 //		System.out.printf("Do all rows sum to the same constant? %b\n", equalHorMercury);
 		
-//		boolean equalVerMercury = squareMercury.eachColumnEqualSum();
+//		boolean equalVerMercury = squareMercury.equalColumnSum();
 //		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerMercury);
 
-//		boolean equalDiaMercury = squareMercury.eachDiagonalEqualSum();
+//		boolean equalDiaMercury = squareMercury.equalDiagonalSum();
 //		System.out.printf("Do all diagonals sum to the same constant? %b\n", equalDiaMercury);
 //
 

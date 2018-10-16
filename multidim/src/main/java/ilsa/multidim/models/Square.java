@@ -25,14 +25,19 @@ public class Square {
 	}
 
 	
-	private boolean checkRowSum() {
+	private boolean equalRowSum() {
 		
 		
 		return false;
 	}
 	
 	
-	private boolean checkColumnSum() {
+	private boolean equalColumnSum() {
+		
+		return false;
+	}
+	
+	private boolean equalDiagonalSum() {
 		
 		return false;
 	}
