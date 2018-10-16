@@ -24,6 +24,21 @@ public class Square {
 		return rowSize;
 	}
 
+	
+	private boolean checkRowSum() {
+		
+		
+		return false;
+	}
+	
+	
+	private boolean checkColumnSum() {
+		
+		return false;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder squareString = new StringBuilder();
