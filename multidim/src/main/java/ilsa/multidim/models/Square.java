@@ -26,6 +26,7 @@ public class Square {
 
 	//TODO afmaken
 	private boolean equalRowSum() {
+		int total = 0;
 		for (int row = 0; row < square.length; row++) {
 
 		}
