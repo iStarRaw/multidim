@@ -6,55 +6,51 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-
 /**
- * Hello world!
+ * Magic Squares making use of multi-dimensional arrays
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
-		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
+public class App {
+	public static void main(String[] args) {
 		
+		//countTokens();
+		//
+		//countLines();
+		
+		
+		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
+		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
+
 		Square squareMercury = new Square();
 		Square squareLuna = new Square();
-		
-		
-		
+
 		readFile(FILE_MERCURY, squareMercury);
 
 		// check that all rows sum to the same constant.
 		boolean equalHorMercury = squareMercury.eachLineEqualSum();
 		System.out.printf("Do all rows sum to the same constant? %b\n", equalHorMercury);
-		
-		//check that all columns sum to the same constant.
+
+		// check that all columns sum to the same constant.
 		boolean equalVerMercury = squareMercury.eachColumnEqualSum();
 		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerMercury);
 
-		//check that all diagonals sum to the same constant.
+		// check that all diagonals sum to the same constant.
 		boolean equalDiaMercury = squareMercury.eachDiagonalEqualSum();
 		System.out.printf("Do all diagonals sum to the same constant? %b\n", equalDiaMercury);
-		
-		
-		
-		
+
 		readFile(FILE_LUNA, squareLuna);
 
 		boolean equalSumLuna = squareLuna.eachLineEqualSum();
 		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
-		
+
 		boolean equalVerluna = squareLuna.eachColumnEqualSum();
 		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
-		
+
 		boolean equalDiaLuna = squareLuna.eachDiagonalEqualSum();
 		System.out.printf("Do all diagonals sum to the same constant? %b\n", equalDiaLuna);
 
 	}
 
-	
-	
 	private static void readFile(URL fileName, Square square) {
 		int numberOfItems = countLines(fileName);
 		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
@@ -79,7 +75,6 @@ public class App
 
 	}
 
-	
 	private static int countLines(URL fileName) {
 		int count = 0;
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
@@ -100,5 +95,4 @@ public class App
 		return count;
 	}
 
-    }
 }
