@@ -33,7 +33,6 @@ public class Square {
 
 		for (int row = 1; row < square.length; row++) {
 			int totalOfThisRow = 0;
-
 			for (int column = 0; column < square[row].length; column++)
 				totalOfThisRow += square[row][column];
 
@@ -55,7 +54,6 @@ public class Square {
 
 		for (int column = 1; column < square[0].length; column++) {
 			int totalOfThisColumn = 0;
-
 			for (int row = 0; row < square.length; row++) {
 				totalOfThisColumn += square[row][column];
 			}
@@ -72,6 +70,8 @@ public class Square {
 	// TODO afmaken
 	public boolean equalDiagonalSum() {
 
+		
+		
 		return false;
 	}
 

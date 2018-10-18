@@ -32,8 +32,8 @@ public class App {
 		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
 
 		// check that all columns sum to the same constant.
-//		boolean equalVerluna = squareLuna.equalColumnSum();
-//		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
+		boolean equalVerluna = squareLuna.equalColumnSum();
+		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
 
 		// check that all diagonals sum to the same constant.
 //		boolean equalDiaLuna = squareLuna.equalDiagonalSum();
