@@ -38,7 +38,6 @@ public class Square {
 				totalOfThisRow += square[row][column];
 
 			if (totalOfThisRow != firstTotal) {
-
 				return false;
 			}
 		}
@@ -48,16 +47,28 @@ public class Square {
 
 	// TODO afmaken
 	public boolean equalColumnSum() {
+		int firstTotal = 0;
+		
+		for (int row = 0; row < square.length; row++) {
+			firstTotal += square[row][0];
+		}
+		System.out.printf("Sum for 1rst column is %d.\n", firstTotal);
 
-		for (int column = 0; column < square[0].length; column++) {
-			int total = 0;
-			for (int row = 0; row < square.length; row++)
-				total += square[row][column];
-			System.out.println("Sum for column " + column + " is " + total);
+		for (int column = 1; column < square[0].length; column++) {
+			int totalOfThisColumn = 0;
+
+			for (int row = 0; row < square.length; row++) {
+				totalOfThisColumn += square[row][column];
+				System.out.println("Sum for column " + column + " is " + totalOfThisColumn);
+				System.out.println(firstTotal);
+				if (firstTotal != totalOfThisColumn) {
+					return false;
+				}
+			}
 
 		}
 
-		return false;
+		return true;
 	}
 
 	// TODO afmaken
