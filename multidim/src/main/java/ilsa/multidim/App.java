@@ -3,6 +3,8 @@ package ilsa.multidim;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -15,49 +17,35 @@ import ilsa.multidim.models.Square;
  */
 public class App {
 	public static void main(String[] args) {
-
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
 		
+		List<URL> fileBook = new ArrayList<>();
 		
+		fileBook.add(FILE_LUNA);
+		fileBook.add(FILE_MERCURY);
 		
+		for (URL file: fileBook) {
+			Square square;
+			square = createSquare(FILE_LUNA);
+			readFile(FILE_LUNA, square);		
+			System.out.println(square.toString());
+			printMagicDetails(square);
+			
+		}
 
-		int numberOfLinesLuna = countLines(FILE_LUNA);
-		int numberOfTokensLuna = countTokens(FILE_LUNA);
-		Square squareLuna = new Square(numberOfTokensLuna, numberOfLinesLuna);
+
 		
-		readFile(FILE_LUNA, squareLuna);
+	}
+
+	
+	
+	private static Square createSquare(URL fileName) {
+		int numberOfLines = countLines(fileName);
+		int numberOfTokens = countTokens(fileName);
 		
-		System.out.printf("Luna has %d columns and %d rows.\n\n", numberOfLinesLuna, numberOfTokensLuna);
-		System.out.println(squareLuna.toString());
-
-		boolean equalSumLuna = squareLuna.equalRowSum();
-		boolean equalVerluna = squareLuna.equalColumnSum();
-		boolean equalDiaLuna = squareLuna.equalDiagonalSum();
-		boolean magicSquareLuna = squareLuna.isMagicSquare();
+		return new Square(numberOfTokens, numberOfLines);
 		
-		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
-		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
-		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", equalDiaLuna);
-		System.out.printf("Is Luna a magic square? %b\n\n", magicSquareLuna);
-
-		int numberOfLinesMercury = countLines(FILE_MERCURY);
-		int numberOfTokensMercury = countTokens(FILE_MERCURY);
-		Square squareMercury = new Square(numberOfTokensMercury, numberOfLinesMercury);
-		readFile(FILE_MERCURY, squareMercury);
-
-		System.out.printf("Mercury has %d columns and %d rows.\n\n", numberOfLinesMercury, numberOfTokensMercury);
-		System.out.println(squareMercury.toString());
-
-		boolean equalHorMercury = squareMercury.equalRowSum();
-		System.out.printf("Do all rows sum to the same constant? %b\n", equalHorMercury);
-		boolean equalVerMercury = squareMercury.equalColumnSum();
-		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerMercury);
-		boolean equalDiaMercury = squareMercury.equalDiagonalSum();
-		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", equalDiaMercury);
-		boolean magicSquareMercury = squareMercury.isMagicSquare();
-		System.out.printf("Is Mercury a magic square? %b\n\n", magicSquareMercury);
-
 	}
 
 	private static void readFile(URL fileName, Square square) {
@@ -111,5 +99,13 @@ public class App {
 
 		return count;
 	}
+	
+	private static void printMagicDetails(Square square) {
+		System.out.printf("Do all rows sum to the same constant? %b\n", square.isEqualRowSum());
+		System.out.printf("Do all columns sum to the same constant? %b\n", square.isEqualColumnSum());
+		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", square.isEqualDiaSum());
+		System.out.printf("Is this square a magic square? %b\n\n", square.isMagicSquare());
+	}
+
 
 }

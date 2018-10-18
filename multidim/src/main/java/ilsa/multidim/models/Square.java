@@ -30,7 +30,7 @@ public class Square {
 	public int getRowSize() {
 		return rowSize;
 	}	
-
+	
 	public boolean isEqualRowSum() {
 		return equalRowSum;
 	}
@@ -112,6 +112,7 @@ public class Square {
 			}
 			squareString.append("\n");
 		}
+		System.out.printf("This square has %d columns and %d rows.\n\n", this.getColumnSize(), this.rowSize);
 		return squareString.toString();
 
 	}
