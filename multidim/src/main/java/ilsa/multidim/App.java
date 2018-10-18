@@ -47,6 +47,8 @@ public class App {
 		if (numberOfLines != numberOfTokens) {
 			new InputMismatchException();
 		}
+		
+		
 		return new Square(numberOfTokens);
 
 	}
