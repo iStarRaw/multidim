@@ -24,18 +24,29 @@ public class Square {
 		return rowSize;
 	}
 
-	//TODO afmaken
 	public boolean equalRowSum() {
-		int total = 0;
-		for (int row = 0; row < square.length; row++) {
+		int firstTotal = 0;
 
+		for (int column = 0; column < square[0].length; column++) {
+			firstTotal += square[0][column];
 		}
 
-		return false;
+		for (int row = 1; row < square.length; row++) {
+			int totalOfThisRow = 0;
+
+			for (int column = 0; column < square[row].length; column++)
+				totalOfThisRow += square[row][column];
+
+			if (totalOfThisRow != firstTotal) {
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
-	
-	//TODO afmaken
+	// TODO afmaken
 	public boolean equalColumnSum() {
 
 		for (int column = 0; column < square[0].length; column++) {
@@ -43,13 +54,13 @@ public class Square {
 			for (int row = 0; row < square.length; row++)
 				total += square[row][column];
 			System.out.println("Sum for column " + column + " is " + total);
+
 		}
 
 		return false;
 	}
 
-	
-	//TODO afmaken
+	// TODO afmaken
 	public boolean equalDiagonalSum() {
 
 		return false;
