@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -19,33 +20,33 @@ public class App {
 	public static void main(String[] args) {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
-		
+
 		List<URL> fileBook = new ArrayList<>();
-		
+
 		fileBook.add(FILE_LUNA);
 		fileBook.add(FILE_MERCURY);
-		
-		
-		for (URL fileName: fileBook) {
+
+		for (URL fileName : fileBook) {
 			Square square;
 			square = createSquare(fileName);
-			
-			readFile(fileName, square);		
+
+			readFile(fileName, square);
 			System.out.println(square.toString());
-			printMagicDetails(square);
-			
+			square.printMagicDetails();
 		}
 
-
-		
 	}
-	
-	private static Square createSquare(URL fileName) {
+
+	private static Square createSquare(URL fileName) throws InputMismatchException {
 		int numberOfLines = countLines(fileName);
 		int numberOfTokens = countTokens(fileName);
-		
-		return new Square(numberOfTokens, numberOfLines);
-		
+
+		// TODO check if it is a square input (numberOfLines & numberOfTokens are same)
+		if (numberOfLines != numberOfTokens) {
+			new InputMismatchException();
+		}
+		return new Square(numberOfTokens);
+
 	}
 
 	private static void readFile(URL fileName, Square square) {
@@ -99,13 +100,5 @@ public class App {
 
 		return count;
 	}
-	
-	private static void printMagicDetails(Square square) {
-		System.out.printf("Do all rows sum to the same constant? %b\n", square.isEqualRowSum());
-		System.out.printf("Do all columns sum to the same constant? %b\n", square.isEqualColumnSum());
-		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", square.isEqualDiaSum());
-		System.out.printf("Is this square a magic square? %b\n\n", square.isMagicSquare());
-	}
-
 
 }

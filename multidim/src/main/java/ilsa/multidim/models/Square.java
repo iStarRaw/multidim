@@ -2,35 +2,30 @@ package ilsa.multidim.models;
 
 public class Square {
 	private int[][] square;
-	private int columnSize;
-	private int rowSize;
+	private int dimension;
 	private boolean equalRowSum;
 	private boolean equalColumnSum;
 	private boolean equalDiaSum;
+	private boolean magicSquare;
 
-	public Square(int columnSize, int rowSize) {
-		this.columnSize = columnSize;
-		this.rowSize = rowSize;
-		square = new int[columnSize][rowSize];
+	public Square(int dimension) {
+		this.dimension = dimension;
+		square = new int[dimension][dimension];
 		equalRowSum();
 		equalColumnSum();
 		equalDiaSum();
-		isMagicSquare();
+		checkMagicSquare();
 
 	}
 
 	public int[][] getSquare() {
 		return square;
 	}
-
-	public int getColumnSize() {
-		return columnSize;
+	
+	public int getDimension() {
+		return dimension;
 	}
 
-	public int getRowSize() {
-		return rowSize;
-	}	
-	
 	public boolean isEqualRowSum() {
 		return equalRowSum;
 	}
@@ -41,6 +36,11 @@ public class Square {
 
 	public boolean isEqualDiaSum() {
 		return equalDiaSum;
+	}
+	
+
+	public boolean isMagicSquare() {
+		return magicSquare;
 	}
 
 	private void equalRowSum() {
@@ -62,7 +62,7 @@ public class Square {
 		equalRowSum = true;
 	}
 
-	public void equalColumnSum() {
+	private void equalColumnSum() {
 		int firstTotal = 0;
 
 		for (int row = 0; row < square.length; row++) {
@@ -83,7 +83,7 @@ public class Square {
 
 	}
 
-	public void equalDiaSum() {
+	private void equalDiaSum() {
 		int totalUpDown = 0;
 		int totalDownUp = 0;
 
@@ -98,9 +98,17 @@ public class Square {
 
 	}
 	
-	public boolean isMagicSquare() {
-		return this.equalRowSum && this.equalColumnSum && this.equalDiaSum;
+	private void checkMagicSquare() {
+		magicSquare = this.equalRowSum && this.equalColumnSum && this.equalDiaSum;
 	}
+	
+	public void printMagicDetails() {
+		System.out.printf("Do all rows sum to the same constant? %b\n", this.equalRowSum);
+		System.out.printf("Do all columns sum to the same constant? %b\n", this.equalColumnSum);
+		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", this.equalDiaSum);
+		System.out.printf("Is this square a magic square? %b\n\n", this.magicSquare);
+	}
+
 
 	@Override
 	public String toString() {
@@ -112,9 +120,10 @@ public class Square {
 			}
 			squareString.append("\n");
 		}
-		System.out.printf("This square has %d columns and %d rows.\n\n", this.getColumnSize(), this.rowSize);
+		System.out.printf("This square has %d columns and %d rows.\n\n", this.dimension, this.dimension);
 		return squareString.toString();
 
 	}
+
 
 }
