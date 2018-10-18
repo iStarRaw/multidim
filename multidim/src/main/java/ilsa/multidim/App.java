@@ -41,6 +41,8 @@ public class App {
 		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
 		boolean equalDiaLuna = squareLuna.equalDiagonalSum();
 		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", equalDiaLuna);
+		boolean magicSquareLuna = squareLuna.isMagicSquare();
+		System.out.println(magicSquareLuna);
 		
 		
 		
@@ -53,6 +55,8 @@ public class App {
 		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerMercury);
 		boolean equalDiaMercury = squareMercury.equalDiagonalSum();
 		System.out.printf("Do all diagonals sum to the same constant? %b\n", equalDiaMercury);
+		boolean magicSquareMercury = squareMercury.isMagicSquare();
+		System.out.println(magicSquareMercury);
 
 
 

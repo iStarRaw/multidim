@@ -78,6 +78,10 @@ public class Square {
 		return (totalUpDown == totalDownUp);
 
 	}
+	
+	public boolean isMagicSquare() {
+		return equalRowSum() && equalColumnSum() && equalDiagonalSum();
+	}
 
 	@Override
 	public String toString() {
