@@ -19,7 +19,6 @@ public class App {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
 
-		
 		int numberOfLinesLuna = countLines(FILE_LUNA);
 		int numberOfTokensLuna = countTokens(FILE_LUNA);
 		System.out.printf("Luna has %d columns and %d rows.\n", numberOfLinesLuna, numberOfTokensLuna);
@@ -33,8 +32,8 @@ public class App {
 		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
 
 		// check that all columns sum to the same constant.
-		boolean equalVerluna = squareLuna.equalColumnSum();
-		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
+//		boolean equalVerluna = squareLuna.equalColumnSum();
+//		System.out.printf("Do all columns sum to the same constant? %b\n", equalVerluna);
 
 		// check that all diagonals sum to the same constant.
 //		boolean equalDiaLuna = squareLuna.equalDiagonalSum();
