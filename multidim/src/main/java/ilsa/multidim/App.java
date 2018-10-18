@@ -29,8 +29,8 @@ public class App {
 		readFile(FILE_LUNA, squareLuna);
 		
 		// check that all rows sum to the same constant
-//		boolean equalSumLuna = squareLuna.equalRowSum();
-//		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
+		boolean equalSumLuna = squareLuna.equalRowSum();
+		System.out.printf("Do all rows sum to the same constant? %b\n", equalSumLuna);
 
 		// check that all columns sum to the same constant.
 //		boolean equalVerluna = squareLuna.equalColumnSum();
@@ -81,7 +81,7 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
-			System.out.println("End of file has been reached\n");
+			System.out.println("End of file has been reached.\n");
 		}
 
 		System.out.println(square.toString());
@@ -101,7 +101,7 @@ public class App {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file\n");
+			System.out.println("Reached end of file.\n");
 		}
 		return count;
 	}
@@ -118,7 +118,7 @@ public class App {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchElementException e) {
-			System.out.println("No line was found, or empty line\n");
+			System.out.println("No line was found, or line is empty.\n");
 		}
 
 		return count;

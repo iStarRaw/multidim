@@ -25,7 +25,7 @@ public class Square {
 	}
 
 	//TODO afmaken
-	private boolean equalRowSum() {
+	public boolean equalRowSum() {
 		int total = 0;
 		for (int row = 0; row < square.length; row++) {
 
@@ -36,7 +36,7 @@ public class Square {
 
 	
 	//TODO afmaken
-	private boolean equalColumnSum() {
+	public boolean equalColumnSum() {
 
 		for (int column = 0; column < square[0].length; column++) {
 			int total = 0;
@@ -50,7 +50,7 @@ public class Square {
 
 	
 	//TODO afmaken
-	private boolean equalDiagonalSum() {
+	public boolean equalDiagonalSum() {
 
 		return false;
 	}
