@@ -25,10 +25,10 @@ public class App {
 		fileBook.add(FILE_LUNA);
 		fileBook.add(FILE_MERCURY);
 		
-		for (URL file: fileBook) {
+		for (URL fileName: fileBook) {
 			Square square;
-			square = createSquare(FILE_LUNA);
-			readFile(FILE_LUNA, square);		
+			square = createSquare(fileName);
+			readFile(fileName, square);		
 			System.out.println(square.toString());
 			printMagicDetails(square);
 			
