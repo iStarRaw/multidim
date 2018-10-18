@@ -4,11 +4,18 @@ public class Square {
 	private int[][] square;
 	private int columnSize;
 	private int rowSize;
+	private boolean equalRowSum;
+	private boolean equalColumnSum;
+	private boolean equalDiaSum;
 
 	public Square(int columnSize, int rowSize) {
 		this.columnSize = columnSize;
 		this.rowSize = rowSize;
 		square = new int[columnSize][rowSize];
+		equalRowSum();
+		equalColumnSum();
+		equalDiaSum();
+		isMagicSquare();
 
 	}
 
@@ -22,9 +29,21 @@ public class Square {
 
 	public int getRowSize() {
 		return rowSize;
+	}	
+
+	public boolean isEqualRowSum() {
+		return equalRowSum;
 	}
 
-	public boolean equalRowSum() {
+	public boolean isEqualColumnSum() {
+		return equalColumnSum;
+	}
+
+	public boolean isEqualDiaSum() {
+		return equalDiaSum;
+	}
+
+	private void equalRowSum() {
 		int firstTotal = 0;
 
 		for (int column = 0; column < square[0].length; column++) {
@@ -37,13 +56,13 @@ public class Square {
 				totalOfThisRow += square[row][column];
 
 			if (totalOfThisRow != firstTotal) {
-				return false;
+				equalRowSum = false;
 			}
 		}
-		return true;
+		equalRowSum = true;
 	}
 
-	public boolean equalColumnSum() {
+	public void equalColumnSum() {
 		int firstTotal = 0;
 
 		for (int row = 0; row < square.length; row++) {
@@ -57,14 +76,14 @@ public class Square {
 			}
 
 			if (firstTotal != totalOfThisColumn) {
-				return false;
+				equalColumnSum = false;
 			}
 		}
-		return true;
+		equalColumnSum = true;
 
 	}
 
-	public boolean equalDiagonalSum() {
+	public void equalDiaSum() {
 		int totalUpDown = 0;
 		int totalDownUp = 0;
 
@@ -75,12 +94,12 @@ public class Square {
 		for (int row = square.length - 1; row >= 0; row--) {
 			totalDownUp += square[row][row];
 		}
-		return (totalUpDown == totalDownUp);
+		equalDiaSum = (totalUpDown == totalDownUp);
 
 	}
 	
 	public boolean isMagicSquare() {
-		return equalRowSum() && equalColumnSum() && equalDiagonalSum();
+		return this.equalRowSum && this.equalColumnSum && this.equalDiaSum;
 	}
 
 	@Override
