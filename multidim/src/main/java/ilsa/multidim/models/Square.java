@@ -45,30 +45,28 @@ public class Square {
 		return true;
 	}
 
-	// TODO afmaken
 	public boolean equalColumnSum() {
 		int firstTotal = 0;
-		
+
 		for (int row = 0; row < square.length; row++) {
 			firstTotal += square[row][0];
 		}
-		System.out.printf("Sum for 1rst column is %d.\n", firstTotal);
+//		System.out.printf("Sum of the 1st column is %d.\n", firstTotal);
 
 		for (int column = 1; column < square[0].length; column++) {
 			int totalOfThisColumn = 0;
 
 			for (int row = 0; row < square.length; row++) {
 				totalOfThisColumn += square[row][column];
-				System.out.println("Sum for column " + column + " is " + totalOfThisColumn);
-				System.out.println(firstTotal);
-				if (firstTotal != totalOfThisColumn) {
-					return false;
-				}
 			}
 
+//			System.out.println("Sum for column " + (column + 1) + " is " + totalOfThisColumn);
+			if (firstTotal != totalOfThisColumn) {
+				return false;
+			}
 		}
-
 		return true;
+
 	}
 
 	// TODO afmaken
