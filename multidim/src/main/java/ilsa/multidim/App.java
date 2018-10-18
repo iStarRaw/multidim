@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import ilsa.multidim.models.Square;
 
 /**
- * Magic Squares, making use of multi-dimensional arrays
+ * Magic Squares, making use of multi-dimensional array.
  *
  */
 public class App {
@@ -29,6 +29,7 @@ public class App {
 		
 		readFile(FILE_LUNA, squareLuna);
 		readFile(FILE_MERCURY, squareMercury);
+		
 		
 		
 		System.out.printf("Luna has %d columns and %d rows.\n\n", numberOfLinesLuna, numberOfTokensLuna);
