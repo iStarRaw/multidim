@@ -40,7 +40,6 @@ public class Square {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -50,7 +49,6 @@ public class Square {
 		for (int row = 0; row < square.length; row++) {
 			firstTotal += square[row][0];
 		}
-//		System.out.printf("Sum of the 1st column is %d.\n", firstTotal);
 
 		for (int column = 1; column < square[0].length; column++) {
 			int totalOfThisColumn = 0;
@@ -58,7 +56,6 @@ public class Square {
 				totalOfThisColumn += square[row][column];
 			}
 
-//			System.out.println("Sum for column " + (column + 1) + " is " + totalOfThisColumn);
 			if (firstTotal != totalOfThisColumn) {
 				return false;
 			}
@@ -69,10 +66,21 @@ public class Square {
 
 	// TODO afmaken
 	public boolean equalDiagonalSum() {
+		int totalUpDown = 0;
+		for (int row = 0; row < square.length; row++) {
+			for (int column = 0; column < square[row].length; column++) {
+				totalUpDown += square[row][column];
+			}
+		}
 
+		int totalDownUp = 0;
+		for (int row = square.length - 1; row >= 0; row--) {
+			for (int column = 0; column < square[row].length; column++) {
+				totalDownUp += square[row][column];
+			}
+		}
+		return (totalUpDown == totalDownUp);
 		
-		
-		return false;
 	}
 
 	@Override
