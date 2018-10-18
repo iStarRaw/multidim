@@ -64,23 +64,19 @@ public class Square {
 
 	}
 
-	// TODO afmaken
 	public boolean equalDiagonalSum() {
 		int totalUpDown = 0;
+		int totalDownUp = 0;
+
 		for (int row = 0; row < square.length; row++) {
-			for (int column = 0; column < square[row].length; column++) {
-				totalUpDown += square[row][column];
-			}
+			totalUpDown += square[row][row];
 		}
 
-		int totalDownUp = 0;
 		for (int row = square.length - 1; row >= 0; row--) {
-			for (int column = 0; column < square[row].length; column++) {
-				totalDownUp += square[row][column];
-			}
+			totalDownUp += square[row][row];
 		}
 		return (totalUpDown == totalDownUp);
-		
+
 	}
 
 	@Override
