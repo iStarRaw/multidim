@@ -41,7 +41,7 @@ public class App {
 		int numberOfLines = countLines(fileName);
 		int numberOfTokens = countTokens(fileName);
 
-		// TODO check if it is a square input (numberOfLines & numberOfTokens are same)
+		// TODO check if input is a square (numberOfLines & numberOfTokens are same)
 		if (numberOfLines != numberOfTokens) {
 			new InputMismatchException();
 		}
