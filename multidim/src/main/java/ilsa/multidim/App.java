@@ -29,8 +29,7 @@ public class App {
 		fileBook.add(FILE_WEN);
 
 		for (URL fileName : fileBook) {
-			Square square;
-			square = createSquare(fileName);
+			Square square = createSquare(fileName);
 
 			readFile(fileName, square);
 			System.out.println(square.toString());
@@ -39,23 +38,31 @@ public class App {
 
 	}
 
-	private static Square createSquare(URL fileName) throws InputMismatchException {
-		int numberOfLines = countLines(fileName);
-		int numberOfTokens = countTokens(fileName);
+//	private static Square createSquare(URL fileName) throws InputMismatchException {
+//		int numberOfLines = countLines(fileName);
+//		int numberOfTokens = countTokens(fileName);
+//
+//		// TODO check if input is a square (numberOfLines & numberOfTokens are same)
+//		if (numberOfLines != numberOfTokens) {
+//			new InputMismatchException();
+//		}
+//		
+//		
+//		return new Square(numberOfTokens);
+//
+//	}
 
-		// TODO check if input is a square (numberOfLines & numberOfTokens are same)
-		if (numberOfLines != numberOfTokens) {
-			new InputMismatchException();
-		}
-		
-		
-		return new Square(numberOfTokens);
+	private static Square createSquare(URL fileName) {
+
+		readFile(fileName);
 
 	}
 
 	private static void readFile(URL fileName, Square square) {
-		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
 
+		isSquare(fileName);
+
+		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
 			while (readLine.hasNextLine()) {
 
 				for (int row = 0; row < square.getSquare().length; row++) {
@@ -68,8 +75,15 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
-			System.out.println("End of file has been reached.\n");
+			System.out.println("Reached end of file.\n");
 		}
+	}
+
+	private static boolean isSquare(URL fileName) {
+		int numberOfLines = countLines(fileName);
+		int numberOfTokens = countTokens(fileName);
+
+		return numberOfTokens != 0 || numberOfTokens == numberOfLines;
 	}
 
 	private static int countLines(URL fileName) {
@@ -82,7 +96,7 @@ public class App {
 			}
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
 			System.out.println("Reached end of file.\n");
 		}
@@ -96,8 +110,18 @@ public class App {
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
 			count = line.countTokens();
 
+			while (readFile.hasNextLine()) {
+				StringTokenizer followingLine = new StringTokenizer(readFile.nextLine());
+				int temp = followingLine.countTokens();
+
+				if (temp != count) {
+					count = 0;
+					break;
+				}
+			}
+
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
 			System.out.println("No line was found, or line is empty.\n");
 		}
