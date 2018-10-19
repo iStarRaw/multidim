@@ -7,6 +7,9 @@ public class Square {
 	private boolean equalColumnSum;
 	private boolean equalDiaSum;
 	private boolean magicSquare;
+	private int rowSum;
+	private int columnSum;
+	private int diaSum;
 
 	public Square(int dimension) {
 		this.dimension = dimension;
@@ -21,45 +24,33 @@ public class Square {
 	public int[][] getSquare() {
 		return square;
 	}
-	
-	public int getDimension() {
-		return dimension;
-	}
-
-	public boolean isEqualRowSum() {
-		return equalRowSum;
-	}
-
-	public boolean isEqualColumnSum() {
-		return equalColumnSum;
-	}
-
-	public boolean isEqualDiaSum() {
-		return equalDiaSum;
-	}
-	
-
-	public boolean isMagicSquare() {
-		return magicSquare;
-	}
 
 	private void equalRowSum() {
 		int firstTotal = 0;
 
 		for (int column = 0; column < square[0].length; column++) {
 			firstTotal += square[0][column];
+//			System.out.println(firstTotal);
 		}
 
 		for (int row = 1; row < square.length; row++) {
 			int totalOfThisRow = 0;
-			for (int column = 0; column < square[row].length; column++)
+			for (int column = 0; column < square[row].length; column++) {
 				totalOfThisRow += square[row][column];
+//				System.out.println(totalOfThisRow);
+			}
 
 			if (totalOfThisRow != firstTotal) {
 				equalRowSum = false;
 			}
 		}
+		
 		equalRowSum = true;
+		
+		if (equalRowSum) {
+			rowSum = firstTotal;
+		}
+		
 	}
 
 	private void equalColumnSum() {
@@ -81,6 +72,10 @@ public class Square {
 		}
 		equalColumnSum = true;
 
+		if (equalColumnSum) {
+			columnSum = firstTotal;
+		}
+		
 	}
 
 	private void equalDiaSum() {
@@ -94,7 +89,12 @@ public class Square {
 		for (int row = square.length - 1; row >= 0; row--) {
 			totalDownUp += square[row][row];
 		}
+		
 		equalDiaSum = (totalUpDown == totalDownUp);
+		
+		if (equalDiaSum) {
+			diaSum = totalUpDown;
+		}
 
 	}
 	
@@ -103,9 +103,9 @@ public class Square {
 	}
 	
 	public void printMagicDetails() {
-		System.out.printf("Do all rows sum to the same constant? %b\n", this.equalRowSum);
-		System.out.printf("Do all columns sum to the same constant? %b\n", this.equalColumnSum);
-		System.out.printf("Do all diagonals sum to the same constant? %b\n\n", this.equalDiaSum);
+		System.out.printf("Do all rows sum to the same constant of %d? %b\n", this.rowSum, this.equalRowSum);
+		System.out.printf("Do all columns sum to the same constant of %d? %b\n", this.columnSum, this.equalColumnSum);
+		System.out.printf("Do all diagonals sum to the same constant of %d? %b\n\n", this.diaSum, this.equalDiaSum);
 		System.out.printf("Is this square a magic square? %b\n\n", this.magicSquare);
 	}
 

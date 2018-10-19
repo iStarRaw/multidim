@@ -93,6 +93,7 @@ public class App {
 		} catch (NoSuchElementException e) {
 			System.out.println("Reached end of file.\n");
 		}
+		System.out.println(count);
 		return count;
 	}
 
@@ -102,12 +103,10 @@ public class App {
 
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
 			count = line.countTokens();
-//			System.out.printf("Count is %d", count);
 
 			while (readFile.nextLine() != null) {
 				StringTokenizer followingLine = new StringTokenizer(readFile.nextLine());
 				int temp = followingLine.countTokens();
-//				System.out.println(temp);
 
 				if (temp != count) {
 					count = 0;
@@ -120,7 +119,7 @@ public class App {
 		} catch (NoSuchElementException e) {
 			System.out.println("No line was found, or line is empty.\n");
 		}
-
+		System.out.println(count);
 		return count;
 	}
 
