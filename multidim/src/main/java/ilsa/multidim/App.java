@@ -25,58 +25,46 @@ public class App {
 		List<URL> fileBook = new ArrayList<>();
 
 		fileBook.add(FILE_LUNA);
-		fileBook.add(FILE_MERCURY);
-		fileBook.add(FILE_WEN);
+//		fileBook.add(FILE_MERCURY);
+//		fileBook.add(FILE_WEN);
 
 		for (URL fileName : fileBook) {
-			Square square = createSquare(fileName);
+			
+			createSquare(fileName);
 
-			readFile(fileName, square);
-			System.out.println(square.toString());
-			square.printMagicDetails();
+//			System.out.println(square.toString());
+//			square.printMagicDetails();
 		}
 
 	}
 
-//	private static Square createSquare(URL fileName) throws InputMismatchException {
-//		int numberOfLines = countLines(fileName);
-//		int numberOfTokens = countTokens(fileName);
-//
-//		// TODO check if input is a square (numberOfLines & numberOfTokens are same)
-//		if (numberOfLines != numberOfTokens) {
-//			new InputMismatchException();
-//		}
-//		
-//		
-//		return new Square(numberOfTokens);
-//
-//	}
+	private static void createSquare(URL fileName) {
+		boolean squareAdmitted = isSquare(fileName);
+//		System.out.println(squareAdmitted);
+		
+		
+		
+		if (squareAdmitted) {
+			Square square = new Square(countLines(fileName));
+			
+			try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
+				while (readLine.hasNextLine()) {
 
-	private static Square createSquare(URL fileName) {
-
-		readFile(fileName);
-
-	}
-
-	private static void readFile(URL fileName, Square square) {
-
-		isSquare(fileName);
-
-		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
-			while (readLine.hasNextLine()) {
-
-				for (int row = 0; row < square.getSquare().length; row++) {
-					for (int column = 0; column < square.getSquare()[row].length; column++) {
-						square.getSquare()[row][column] = readLine.nextInt();
+					for (int row = 0; row < square.getSquare().length; row++) {
+						for (int column = 0; column < square.getSquare()[row].length; column++) {
+							square.getSquare()[row][column] = readLine.nextInt();
+						}
 					}
 				}
-			}
 
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found!\n");
-		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.\n");
+			} catch (FileNotFoundException e) {
+				System.out.println("File not found!\n");
+			} catch (NoSuchElementException e) {
+				System.out.println("Reached end of file.\n");
+			}
 		}
+//		System.out.println("Your input is not a square!");
+
 	}
 
 	private static boolean isSquare(URL fileName) {
@@ -109,10 +97,12 @@ public class App {
 
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
 			count = line.countTokens();
+//			System.out.printf("Count is %d", count);
 
-			while (readFile.hasNextLine()) {
+			while (readFile.nextLine() != null) {
 				StringTokenizer followingLine = new StringTokenizer(readFile.nextLine());
 				int temp = followingLine.countTokens();
+//				System.out.println(temp);
 
 				if (temp != count) {
 					count = 0;
