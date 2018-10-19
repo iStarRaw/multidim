@@ -19,28 +19,30 @@ import ilsa.multidim.models.Square;
 public class App {
 	public static void main(String[] args) {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
-//		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
-//		final URL FILE_WEN = App.class.getClassLoader().getResource("wen.txt");
+		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
+		final URL FILE_WEN = App.class.getClassLoader().getResource("wen.txt");
 
 		List<URL> fileBook = new ArrayList<>();
 
 		fileBook.add(FILE_LUNA);
-//		fileBook.add(FILE_MERCURY);
-//		fileBook.add(FILE_WEN);
-
+		fileBook.add(FILE_MERCURY);
+		fileBook.add(FILE_WEN);
+		
+		
 		for (URL fileName : fileBook) {
 
 			try {
 				Square square = createSquare(fileName);
 				System.out.println(square.toString());
 				square.printMagicDetails();
+
 			} catch (InputMismatchException e) {
 				System.out.println("Input is not a square");
 			}
-
-			
 		}
 
+		
+		
 	}
 
 	private static Square createSquare(URL fileName) throws InputMismatchException {
@@ -67,7 +69,7 @@ public class App {
 			System.out.println("Reached end of file.\n");
 		}
 		return square;
-		
+
 	}
 
 	private static boolean isSquare(URL fileName) {
