@@ -33,14 +33,12 @@ public class Square {
 
 		for (int column = 0; column < square[0].length; column++) {
 			firstTotal += square[0][column];
-//			System.out.println(firstTotal);
 		}
 
 		for (int row = 1; row < square.length; row++) {
 			int totalOfThisRow = 0;
 			for (int column = 0; column < square[row].length; column++) {
 				totalOfThisRow += square[row][column];
-//				System.out.println(totalOfThisRow);
 			}
 
 			if (totalOfThisRow != firstTotal) {
