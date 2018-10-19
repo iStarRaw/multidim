@@ -2,7 +2,7 @@ package ilsa.multidim.models;
 
 public class Square {
 	private int[][] square;
-	private int dimension;
+	private int side;
 	private boolean equalRowSum;
 	private boolean equalColumnSum;
 	private boolean equalDiaSum;
@@ -11,18 +11,21 @@ public class Square {
 	private int columnSum;
 	private int diaSum;
 
-	public Square(int dimension) {
-		this.dimension = dimension;
-		square = new int[dimension][dimension];
-		equalRowSum();
-		equalColumnSum();
-		equalDiaSum();
-		checkMagicSquare();
+	public Square(int side) {
+		this.side = side;
+		square = new int[side][side];
 
 	}
 
 	public int[][] getSquare() {
 		return square;
+	}
+	
+	public void checkSquare() {
+		equalRowSum();
+		equalColumnSum();
+		equalDiaSum();
+		checkMagicSquare();
 	}
 
 	private void equalRowSum() {
@@ -98,6 +101,7 @@ public class Square {
 
 	}
 	
+	
 	private void checkMagicSquare() {
 		magicSquare = this.equalRowSum && this.equalColumnSum && this.equalDiaSum;
 	}
@@ -108,7 +112,8 @@ public class Square {
 		System.out.printf("Do all diagonals sum to the same constant of %d? %b\n\n", this.diaSum, this.equalDiaSum);
 		System.out.printf("Is this square a magic square? %b\n\n", this.magicSquare);
 	}
-
+	
+	
 
 	@Override
 	public String toString() {
@@ -120,7 +125,7 @@ public class Square {
 			}
 			squareString.append("\n");
 		}
-		System.out.printf("This square has %d columns and %d rows.\n\n", this.dimension, this.dimension);
+		System.out.printf("\nThis square has a side of %d.\n\n", this.side);
 		return squareString.toString();
 
 	}

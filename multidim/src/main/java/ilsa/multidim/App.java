@@ -37,7 +37,7 @@ public class App {
 				square.printMagicDetails();
 
 			} catch (InputMismatchException e) {
-				System.out.println("Input is not a square");
+				System.out.printf("%s does not contain a square\n", fileName.toString());
 			}
 		}
 
@@ -52,23 +52,25 @@ public class App {
 			throw new InputMismatchException();
 		}
 
-		Square square = new Square(countLines(fileName));
+		Square mySquare = new Square(countLines(fileName));
 
 		try (Scanner readLine = new Scanner(new FileReader(fileName.getFile()))) {
 			while (readLine.hasNextLine()) {
 
-				for (int row = 0; row < square.getSquare().length; row++) {
-					for (int column = 0; column < square.getSquare()[row].length; column++) {
-						square.getSquare()[row][column] = readLine.nextInt();
+				for (int row = 0; row < mySquare.getSquare().length; row++) {
+					for (int column = 0; column < mySquare.getSquare()[row].length; column++) {
+						mySquare.getSquare()[row][column] = readLine.nextInt();
 					}
+					
 				}
 			}
+			mySquare.checkSquare();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.\n");
+			System.out.println("Reached end of file.");
 		}
-		return square;
+		return mySquare;
 
 	}
 
@@ -91,9 +93,8 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.\n");
+			System.out.println("Reached end of file.");
 		}
-		System.out.println(count);
 		return count;
 	}
 
@@ -117,9 +118,8 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
 		} catch (NoSuchElementException e) {
-			System.out.println("No line was found, or line is empty.\n");
+			System.out.println("Reached end of file.");
 		}
-		System.out.println(count);
 		return count;
 	}
 
