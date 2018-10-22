@@ -17,6 +17,9 @@ import ilsa.multidim.models.Square;
  *
  */
 public class App {
+	
+	static boolean onlyDigits = true;
+	
 	public static void main(String[] args) {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
@@ -27,17 +30,13 @@ public class App {
 		fileBook.add(FILE_LUNA);
 		fileBook.add(FILE_MERCURY);
 		fileBook.add(FILE_WEN);
-		
-		
+
 		for (URL fileName : fileBook) {
-
-			try {
-				Square square = createSquare(fileName);
-				System.out.println(square.toString());
-				square.printMagicDetails();
-
-			} catch (InputMismatchException e) {
-				System.out.printf("%s does not contain a square\n", fileName.toString());
+			Square square = createSquare(fileName);
+			
+			if (onlyDigits) {
+			System.out.println(square.toString());
+			square.printMagicDetails();
 			}
 		}
 
@@ -61,12 +60,14 @@ public class App {
 					for (int column = 0; column < mySquare.getSquare()[row].length; column++) {
 						mySquare.getSquare()[row][column] = readLine.nextInt();
 					}
-					
 				}
 			}
 			mySquare.checkSquare();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
+		} catch (InputMismatchException e) {
+			System.out.println("Please provide a file with only digits!\n");
+			onlyDigits = false;
 		} catch (NoSuchElementException e) {
 			System.out.println("Reached end of file.");
 		}
@@ -100,6 +101,7 @@ public class App {
 
 	private static int countTokens(URL fileName) {
 		int count = 0;
+
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
 
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
@@ -117,6 +119,8 @@ public class App {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!\n");
+		} catch (InputMismatchException e) {
+			System.out.printf("%s does not contain a square\n", fileName.toString());
 		} catch (NoSuchElementException e) {
 			System.out.println("Reached end of file.");
 		}
