@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ilsa.multidim.models.Square;
 
@@ -18,6 +20,7 @@ import ilsa.multidim.models.Square;
  */
 public class App {
 	
+	private static final Logger logger = Logger.getLogger(App.class.getName());
 	static boolean onlyDigits = true;
 	
 	public static void main(String[] args) {
@@ -58,19 +61,19 @@ public class App {
 
 				for (int row = 0; row < mySquare.getSquare().length; row++) {
 					for (int column = 0; column < mySquare.getSquare()[row].length; column++) {
+						if (readLine.hasNextInt()) {
 						mySquare.getSquare()[row][column] = readLine.nextInt();
+						}
 					}
 				}
 			}
 			mySquare.checkSquare();
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found!\n");
+			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
 		} catch (InputMismatchException e) {
-			System.out.println("Please provide a file with only digits!\n");
+			logger.log(Level.WARNING, "Please provide a file with only digits!");
 			onlyDigits = false;
-		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.");
-		}
+		} 
 		return mySquare;
 
 	}
@@ -88,14 +91,15 @@ public class App {
 
 			while (readFile.nextLine() != null) {
 				count++;
+				if(!readFile.hasNextLine()) {
+					break;
+				}
 				readFile.nextLine();
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found!\n");
-		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.");
-		}
+			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
+		} 
 		return count;
 	}
 
@@ -110,7 +114,7 @@ public class App {
 			while (readFile.nextLine() != null) {
 				StringTokenizer followingLine = new StringTokenizer(readFile.nextLine());
 				int temp = followingLine.countTokens();
-
+				
 				if (temp != count) {
 					count = 0;
 					break;
@@ -118,11 +122,11 @@ public class App {
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found!\n");
+			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
 		} catch (InputMismatchException e) {
-			System.out.printf("%s does not contain a square\n", fileName.toString());
+			logger.log(Level.WARNING, "File does not contain a square", fileName.toString());
 		} catch (NoSuchElementException e) {
-			System.out.println("Reached end of file.");
+			logger.log(Level.INFO, "All tokens have been count successfully.");
 		}
 		return count;
 	}
