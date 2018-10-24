@@ -19,10 +19,10 @@ import ilsa.multidim.models.Square;
  *
  */
 public class App {
-	
+
 	private static final Logger logger = Logger.getLogger(App.class.getName());
 	static boolean onlyDigits = true;
-	
+
 	public static void main(String[] args) {
 		final URL FILE_LUNA = App.class.getClassLoader().getResource("Luna.txt");
 //		final URL FILE_MERCURY = App.class.getClassLoader().getResource("Mercury.txt");
@@ -35,19 +35,23 @@ public class App {
 //		fileBook.add(FILE_WEN);
 
 		for (URL fileName : fileBook) {
-			Square square = createSquare(fileName);
-			
-			if (onlyDigits) {
-			System.out.println(square.toString());
-			square.printMagicDetails();
+			try {
+				Square square = createSquare(fileName);
+
+				if (onlyDigits) {
+					System.out.println(square.toString());
+					square.printMagicDetails();
+				}
+			} catch (FileNotFoundException e) {
+				logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
+			} catch (InputMismatchException e) {
+				logger.log(Level.WARNING, "File does not contain a square", fileName.toString());
 			}
 		}
 
-		
-		
 	}
 
-	private static Square createSquare(URL fileName) throws InputMismatchException {
+	private static Square createSquare(URL fileName) throws FileNotFoundException, InputMismatchException {
 		boolean squareAdmitted = isSquare(fileName);
 
 		if (!squareAdmitted) {
@@ -61,72 +65,65 @@ public class App {
 
 				for (int row = 0; row < mySquare.getSquare().length; row++) {
 					for (int column = 0; column < mySquare.getSquare()[row].length; column++) {
-						if (readLine.hasNextInt()) {
 						mySquare.getSquare()[row][column] = readLine.nextInt();
-						}
 					}
 				}
 			}
 			mySquare.checkSquare();
-		} catch (FileNotFoundException e) {
-			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
 		} catch (InputMismatchException e) {
 			logger.log(Level.WARNING, "Please provide a file with only digits!");
 			onlyDigits = false;
-		} 
+		}
 		return mySquare;
 
 	}
 
-	private static boolean isSquare(URL fileName) {
+	private static boolean isSquare(URL fileName) throws FileNotFoundException, InputMismatchException {
 		int numberOfLines = countLines(fileName);
 		int numberOfTokens = countTokens(fileName);
 
 		return numberOfTokens != 0 || numberOfTokens == numberOfLines;
 	}
 
-	private static int countLines(URL fileName) {
+	private static int countLines(URL fileName) throws FileNotFoundException {
 		int count = 0;
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
 
 			while (readFile.nextLine() != null) {
 				count++;
-				if(!readFile.hasNextLine()) {
+				if (!readFile.hasNextLine()) {
 					break;
 				}
 				readFile.nextLine();
 			}
 
-		} catch (FileNotFoundException e) {
-			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
-		} 
+		} catch (NoSuchElementException e) {
+			logger.log(Level.INFO, "No more lines found");
+		}
 		return count;
 	}
 
-	private static int countTokens(URL fileName) {
+	private static int countTokens(URL fileName) throws FileNotFoundException, InputMismatchException {
 		int count = 0;
 
 		try (Scanner readFile = new Scanner(new FileReader(fileName.getFile()))) {
-
 			StringTokenizer line = new StringTokenizer(readFile.nextLine());
 			count = line.countTokens();
 
 			while (readFile.nextLine() != null) {
 				StringTokenizer followingLine = new StringTokenizer(readFile.nextLine());
 				int temp = followingLine.countTokens();
-				
+
 				if (temp != count) {
 					count = 0;
 					break;
 				}
+
+				if (!readFile.hasNextLine()) {
+					break;
+				}
 			}
 
-		} catch (FileNotFoundException e) {
-			logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
-		} catch (InputMismatchException e) {
-			logger.log(Level.WARNING, "File does not contain a square", fileName.toString());
-		} catch (NoSuchElementException e) {
-			logger.log(Level.INFO, "All tokens have been count successfully.");
 		}
 		return count;
 	}
