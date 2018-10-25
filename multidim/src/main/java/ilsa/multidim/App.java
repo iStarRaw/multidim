@@ -2,6 +2,7 @@ package ilsa.multidim;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +23,7 @@ import ilsa.multidim.models.Square;
 public class App {
 
 	private static final Logger logger = Logger.getLogger(App.class.getName());
+	
 	static boolean onlyDigits = true;
 
 	public static void main(String[] args) {
@@ -33,19 +36,29 @@ public class App {
 		fileBook.add(FILE_LUNA);
 //		fileBook.add(FILE_MERCURY);
 //		fileBook.add(FILE_WEN);
-
+		
+		FileHandler handler = null;
+		
+		
+		
 		for (URL fileName : fileBook) {
 			try {
+				handler = new FileHandler("mylog.xml");
 				Square square = createSquare(fileName);
 
 				if (onlyDigits) {
 					System.out.println(square.toString());
 					square.printMagicDetails();
 				}
+			
+			} catch (NullPointerException e) {
+				logger.log(Level.INFO, "Check spelling, can't find your file");
 			} catch (FileNotFoundException e) {
 				logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
 			} catch (InputMismatchException e) {
 				logger.log(Level.WARNING, "File does not contain a square", fileName.toString());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -65,7 +78,9 @@ public class App {
 
 				for (int row = 0; row < mySquare.getSquare().length; row++) {
 					for (int column = 0; column < mySquare.getSquare()[row].length; column++) {
+						if (readLine.hasNextInt()) {
 						mySquare.getSquare()[row][column] = readLine.nextInt();
+						}
 					}
 				}
 			}
