@@ -39,11 +39,12 @@ public class App {
 		
 		FileHandler handler = null;
 		
-		
-		
 		for (URL fileName : fileBook) {
 			try {
 				handler = new FileHandler("mylog.xml");
+				logger.addHandler(handler);
+				
+				logger.log(Level.INFO, "About to create a square");
 				Square square = createSquare(fileName);
 
 				if (onlyDigits) {
@@ -52,7 +53,7 @@ public class App {
 				}
 			
 			} catch (NullPointerException e) {
-				logger.log(Level.INFO, "Check spelling, can't find your file");
+				logger.log(Level.INFO, "Check your spelling, can't find your file", e);
 			} catch (FileNotFoundException e) {
 				logger.log(Level.WARNING, "Not able to find your file.", fileName.toString());
 			} catch (InputMismatchException e) {
