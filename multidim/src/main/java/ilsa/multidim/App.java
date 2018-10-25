@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,11 +39,19 @@ public class App {
 //		fileBook.add(FILE_WEN);
 		
 		FileHandler handler = null;
+		ConsoleHandler chandler = null;
 		
 		for (URL fileName : fileBook) {
 			try {
 				handler = new FileHandler("mylog.xml");
+				chandler = new ConsoleHandler();
+				
+				logger.setLevel(Level.FINEST);
+				handler.setLevel(Level.FINE);
+				chandler.setLevel(Level.INFO);
+				
 				logger.addHandler(handler);
+				logger.addHandler(chandler);
 				
 				logger.log(Level.INFO, "About to create a square");
 				Square square = createSquare(fileName);
