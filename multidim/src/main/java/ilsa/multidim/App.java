@@ -38,19 +38,19 @@ public class App {
 //		fileBook.add(FILE_MERCURY);
 //		fileBook.add(FILE_WEN);
 		
-		FileHandler handler = null;
+		FileHandler fhandler = null;
 		ConsoleHandler chandler = null;
 		
 		for (URL fileName : fileBook) {
 			try {
-				handler = new FileHandler("mylog.xml");
+				fhandler = new FileHandler("mylog.xml");
 				chandler = new ConsoleHandler();
 				
 				logger.setLevel(Level.FINEST);
-				handler.setLevel(Level.FINE);
+				fhandler.setLevel(Level.FINE);
 				chandler.setLevel(Level.INFO);
 				
-				logger.addHandler(handler);
+				logger.addHandler(fhandler);
 				logger.addHandler(chandler);
 				
 				logger.log(Level.INFO, "About to create a square");
