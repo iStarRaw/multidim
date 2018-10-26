@@ -101,8 +101,7 @@ public class Square {
 	
 	
 	private void checkMagicSquare() {
-		//sums ook vergelijken!
-		magicSquare = this.equalRowSum && this.equalColumnSum && this.equalDiaSum;
+		magicSquare = (rowSum == columnSum && rowSum == diaSum);
 	}
 	
 	public void printMagicDetails() {
