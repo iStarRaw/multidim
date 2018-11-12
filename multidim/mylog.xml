@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-10-25T12:01:27.658760600Z</date>
-  <millis>1540468887658</millis>
-  <nanos>760600</nanos>
+  <date>2018-11-12T08:10:40.759631700Z</date>
+  <millis>1542010240759</millis>
+  <nanos>631700</nanos>
   <sequence>0</sequence>
   <logger>ilsa.multidim.App</logger>
   <level>INFO</level>
